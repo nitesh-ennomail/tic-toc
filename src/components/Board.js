@@ -1,26 +1,58 @@
-import React from "react";
-import Squre from "./Squre";
+import React, { useState } from "react";
+import Square from "./Square";
 
-function Board() {
+const Board = () => {
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(false);
+  // console.log(board);
+
+  const handleSquareClick = (position) => {
+    console.log(board[position]);
+    if (board[position]) {
+      return;
+    }
+    setBoard((prev) => {
+      return prev.map((square, pos) => {
+        if (pos === position) {
+          console.log(pos);
+          return isXNext ? "X" : "O";
+        } else {
+          return square;
+        }
+      });
+    });
+    setIsXNext((prev) => !prev);
+  };
+
+  const renderSquare = (position) => {
+    return (
+      <Square
+        value={board[position]}
+        onClick={() => {
+          handleSquareClick(position);
+        }}
+      />
+    );
+  };
   return (
-    <div>
-      <div>
-        <Squre value={0} />
-        <Squre value={1} />
-        <Squre value={2} />
+    <div className="board">
+      <div className="board-row">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
       </div>
-      <div>
-        <Squre value={3} />
-        <Squre value={4} />
-        <Squre value={5} />
+      <div className="board-row">
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
       </div>
-      <div>
-        <Squre value={6} />
-        <Squre value={7} />
-        <Squre value={8} />
+      <div className="board-row">
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
       </div>
     </div>
   );
-}
+};
 
 export default Board;

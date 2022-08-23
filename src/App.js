@@ -1,14 +1,15 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
 import Board from "./components/Board";
 
-function App() {
+import "./styles/root.scss";
+
+const App = () => {
   return (
-    <div>
-      <h1>TIC-TOC-TOI</h1>
+    <div className="app">
+      <h1>TIC TAC TOE</h1>
       <Board />
     </div>
   );
-}
+};
 
 export default App;
